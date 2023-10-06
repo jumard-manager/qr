@@ -4,30 +4,26 @@
     <!-- Main -->
     <v-container fluid class="" :style="`margin:30px 0;`">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-layout row justify-center wrap mb-4>
+        <v-layout row justify-center wrap mb-4 v-if="url&&url!='https://jumard.top'">
+          <p 
+            :style="`color:#A9A9A9;font-size:xxx-large;animation-delay:1s;`"
+            class="shdw animate__animated animate__shakeX">↓Click to download↓</p>
+        </v-layout>
+        <v-layout row justify-center wrap mb-4 :style="`margin-top:20px;`">
           <v-flex xs5>
             <v-layout row justify-center wrap mb-4 class="" @click.stop="downloadQR" :style="`cursor: hand; cursor:pointer;`">
-              <transition enter-active-class="animated bounceIn delay1" leave-active-class="animated bounceOut">  
                 <vueqr v-if="url" 
                   :text="qrcdStr" 
                   :margin="5" 
                   :size="size" 
                   :dotScale="dotScale"
                   :logoSrc="logoSrc" 
-                  :callback="setDataUrl" 
-                  class="shdw" ></vueqr>
-              </transition>
+                  :callback="setDataUrl"
+                  :style="/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g.test(qrcdStr)?`animation-delay:1s;animation-iteration-count:infinite;animation-duration: 3s;`:``"
+                  class="shdw animate__animated animate__pulse" ></vueqr>
+              
             </v-layout>
           </v-flex>
-          <!--
-          <v-flex xs5>
-            <v-layout row justify-center wrap mb-4 class="">
-              <transition enter-active-class="animated bounceIn delay1" leave-active-class="animated bounceOut">  
-                <img v-if="url" :src="'https://s.wordpress.com/mshots/v1/' + url + '/?w=' + imgSize + '&h=' + imgSize" class="shdw">
-              </transition>
-            </v-layout>
-          </v-flex>
-          -->
         </v-layout>
 
         <v-layout row justify-center wrap mb-2>
@@ -148,23 +144,11 @@
 </script>
 
 <style scoped>
-  @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css";
-  .delay1 {
-    animation-delay: 1s;
-  }
-  .infinite {
-    /*animation-duration: 5s;*/
-    animation-iteration-count: infinite;
-  }
   .shdw {
-    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.6));
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));
+    opacity: 0.9;
   }
-  .lf0 {
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+
   .p8 {
     padding: 8px 0;
   }
